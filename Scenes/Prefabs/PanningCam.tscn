@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvsgbsy8f6o2h"]
+
+[ext_resource type="Script" path="res://Scripts/PanningCam.gd" id="1_u1nse"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gr66u"]
+size = Vector2(17, 114)
+
+[node name="PanningCam" type="Camera2D"]
+process_mode = 3
+zoom = Vector2(6, 6)
+script = ExtResource("1_u1nse")
+
+[node name="Left" type="Area2D" parent="."]
+position = Vector2(-96, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+shape = SubResource("RectangleShape2D_gr66u")
+
+[node name="Right" type="Area2D" parent="."]
+position = Vector2(96, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+shape = SubResource("RectangleShape2D_gr66u")
+
+[connection signal="body_entered" from="Left" to="." method="_on_left_body_entered"]
+[connection signal="body_entered" from="Right" to="." method="_on_right_body_entered"]
